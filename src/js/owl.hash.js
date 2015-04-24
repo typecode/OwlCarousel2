@@ -64,7 +64,11 @@
 		this.$element.on(this.handlers);
 
 		// register event listener for hash navigation
-		$(window).on('hashchange.owl.navigation', $.proxy(function() {
+		$(window).on('hashchange.owl.navigation', $.proxy(function () {
+		    if (!this.core.options.URLhashListener) {
+		        return false;
+		    }
+
 			var hash = window.location.hash.substring(1),
 				items = this.core.dom.$oItems,
 				position = this.hashes[hash] && items.index(this.hashes[hash]) || 0;
@@ -96,7 +100,7 @@
 		$(window).off('hashchange.owl.navigation');
 
 		for (handler in this.handlers) {
-			this.owl.dom.$el.off(handler, this.handlers[handler]);
+			this.core.dom.$el.off(handler, this.handlers[handler]);
 		}
 		for (property in Object.getOwnPropertyNames(this)) {
 			typeof this[property] != 'function' && (this[property] = null);
