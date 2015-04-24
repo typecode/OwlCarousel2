@@ -78,7 +78,11 @@
 		this.$element.on(this._handlers);
 
 		// register event listener for hash navigation
-		$(window).on('hashchange.owl.navigation', $.proxy(function(e) {
+		$(window).on('hashchange.owl.navigation', $.proxy(function (e) {
+		    if (!this.core.options.URLhashListener) {
+		        return false;
+		    }
+
 			var hash = window.location.hash.substring(1),
 				items = this._core.$stage.children(),
 				position = this._hashes[hash] && items.index(this._hashes[hash]);
