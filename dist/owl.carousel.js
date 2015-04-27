@@ -1762,6 +1762,10 @@
 			}
 		}
 
+		if (this.e._checkVisibile) {
+		    window.clearInterval(this.e._checkVisibile);
+		}
+
 		// Remove event handlers in the ".owl.carousel" namespace
 		this.dom.$el.off('.owl');
 
